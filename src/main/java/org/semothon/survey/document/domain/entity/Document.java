@@ -3,6 +3,7 @@ package org.semothon.survey.document.domain.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.semothon.survey.document.domain.enumerate.DocumentType;
 
 import java.time.LocalDateTime;
 
@@ -18,7 +19,8 @@ public class Document {
     private Long reportId;       // FK nullable(Report.reportId)
     private Long applicationId;  // FK nullable(Application.applicationId)
 
-    private String documentType; // APPLICATION_FORM, REPORT_FORM
+    @Enumerated(EnumType.STRING)
+    private DocumentType documentType; // APPLICATION_FORM, REPORT_FORM
     private String documentPath;
     private LocalDateTime documentUploadedAt;
 }
