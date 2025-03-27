@@ -3,7 +3,7 @@ package org.semothon.survey.application.domain.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.semothon.survey.core.enums.ApplicationStatus;
+import org.semothon.survey.core.enumerate.ApplicationStatus;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

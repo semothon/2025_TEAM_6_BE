@@ -1,4 +1,4 @@
-package org.semothon.survey.core.enums;
+package org.semothon.survey.core.enumerate;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
