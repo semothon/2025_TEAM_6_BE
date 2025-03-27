@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Building {
 
-    Electrical("전자정보대학");
+    SoftwareConvergence("전자정보대학"),
+    Engineering("공과대학"),
+    ArtAndDesign("예술디자인대학");
 
     private final String description;
 }
