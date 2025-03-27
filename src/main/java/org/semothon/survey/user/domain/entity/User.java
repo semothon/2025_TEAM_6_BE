@@ -3,7 +3,6 @@ package org.semothon.survey.user.domain.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.semothon.survey.user.domain.enumerate.UserRole;
 
 @Entity
 @Table(name = "tb_user")

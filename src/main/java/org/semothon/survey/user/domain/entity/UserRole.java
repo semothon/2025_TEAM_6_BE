@@ -1,4 +1,4 @@
-package org.semothon.survey.user.domain.enumerate;
+package org.semothon.survey.user.domain.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
