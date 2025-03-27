@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 public class User {
 
     @Id
-    @Column(name = "user_id", length = 50)
     private String userId; // 학번
 
     private String userName;
