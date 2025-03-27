@@ -13,11 +13,13 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class ClassRoom {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long classroomId;
 
-    private String classroomBuilding;
+    @Enumerated(EnumType.STRING)
+    private Building classroomBuilding;
     private Integer classroomNumber;
     private Integer classroomCapacity;
 
