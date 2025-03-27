@@ -38,6 +38,18 @@ dependencies {
 	// db 관련
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	runtimeOnly 'com.h2database:h2'
+<<<<<<< Updated upstream
+=======
+	implementation 'mysql:mysql-connector-java:8.0.33'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	// s3 관련
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.275'
+	implementation 'software.amazon.awssdk:s3-transfer-manager:2.29.6'
+
+	// swagger 관련
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+>>>>>>> Stashed changes
 }
 
 tasks.named('test') {
