@@ -8,10 +8,12 @@ import org.semothon.survey.user.exception.UserErrorType;
 import org.semothon.survey.user.exception.UserException;
 import org.semothon.survey.user.presentation.response.UserInfoResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class GetUserInfoService {
+@Transactional(readOnly = true)
+public class ReadUserInfoUseCase {
 
     private final UserRepository userRepository;
 
