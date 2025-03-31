@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ReadUserInfoController {
 
-    private final ReadUserInfoUseCase getUserInfoService;
+    private final ReadUserInfoUseCase readUserInfoUseCase;
 
     @GetMapping("api/user")
     public ApiResponse<UserInfoResponse> getUserInfo(@RequestParam String userId, @RequestParam UserRole userRole) {
-        UserInfoResponse userInfoResponse = getUserInfoService.execute(userId, userRole);
+        UserInfoResponse userInfoResponse = readUserInfoUseCase.execute(userId, userRole);
         return ApiResponse.success(userInfoResponse);
     }
 }
