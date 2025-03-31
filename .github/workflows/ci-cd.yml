@@ -61,7 +61,7 @@ jobs:
           IMAGE_TAG: ${{ steps.vars.outputs.short_sha }}
         run: |
           # 하드코딩된 ECR 저장소 이름: kobaco-ecr
-          docker build -t $ECR_REGISTRY/kobaco-ecr:$IMAGE_TAG ./kobaco
+          docker build -t $ECR_REGISTRY/kobaco-ecr:$IMAGE_TAG .
           docker tag $ECR_REGISTRY/kobaco-ecr:$IMAGE_TAG $ECR_REGISTRY/kobaco-ecr:latest
           docker push $ECR_REGISTRY/kobaco-ecr:$IMAGE_TAG
           docker push $ECR_REGISTRY/kobaco-ecr:latest
