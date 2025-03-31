@@ -37,7 +37,8 @@ dependencies {
 
 	// db 관련
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	runtimeOnly 'com.h2database:h2'
+	implementation 'mysql:mysql-connector-java:8.0.33'
+	runtimeOnly 'com.mysql:mysql-connector-j'
 
 	// s3 관련
 	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.275'
