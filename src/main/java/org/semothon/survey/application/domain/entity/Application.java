@@ -20,7 +20,7 @@ public class Application {
     private Long applicationId;
 
     private String userId;  //FK(User.userId)
-    private Long roomId;    //FK(Classroom.classroomId)
+    private Long classroomId;    //FK(Classroom.classroomId)
 
     private String applicationPurpose;
     private Integer applicationParticipants;
@@ -30,7 +30,6 @@ public class Application {
     private LocalTime applicationEnd;
     private LocalDate applicationDate;
 
-    private String applicationDesker;
     private LocalDate applicationApprovedAt;
     private String applicationApprover;
 
@@ -38,6 +37,7 @@ public class Application {
     private ApplicationStatus applicationStatus;
 
     private String applicationRejectReason;
+    private String applicationUrl;
 
     public void approve() {
         if (this.applicationStatus != ApplicationStatus.PENDING) {
