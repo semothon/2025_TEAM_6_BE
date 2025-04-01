@@ -3,7 +3,6 @@ package org.semothon.survey.report.domain.service;
 import lombok.RequiredArgsConstructor;
 import org.semothon.survey.application.exception.ApplicationErrorType;
 import org.semothon.survey.application.exception.ApplicationException;
-import org.semothon.survey.application.presentation.request.ApplicationRejectRequest;
 import org.semothon.survey.report.domain.entity.Report;
 import org.semothon.survey.report.domain.repository.ReportRepository;
 import org.semothon.survey.report.presentation.request.ReportRejectRequest;

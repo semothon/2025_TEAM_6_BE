@@ -1,8 +1,6 @@
 package org.semothon.survey.report.domain.service;
 
 import lombok.RequiredArgsConstructor;
-import org.semothon.survey.application.domain.entity.Application;
-import org.semothon.survey.application.domain.repository.ApplicationRepository;
 import org.semothon.survey.application.exception.ApplicationErrorType;
 import org.semothon.survey.application.exception.ApplicationException;
 import org.semothon.survey.report.domain.entity.Report;
