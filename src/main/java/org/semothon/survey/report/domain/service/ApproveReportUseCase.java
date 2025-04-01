@@ -1,10 +1,10 @@
 package org.semothon.survey.report.domain.service;
 
 import lombok.RequiredArgsConstructor;
-import org.semothon.survey.application.exception.ApplicationErrorType;
-import org.semothon.survey.application.exception.ApplicationException;
 import org.semothon.survey.report.domain.entity.Report;
 import org.semothon.survey.report.domain.repository.ReportRepository;
+import org.semothon.survey.report.exception.ReportErrorType;
+import org.semothon.survey.report.exception.ReportException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +18,7 @@ public class ApproveReportUseCase {
     @Transactional
     public void execute(Long reportId) {
         Report report = reportRepository.findByApplicationId(reportId)
-                .orElseThrow(()-> new ApplicationException(ApplicationErrorType.NOT_EXIST_AVAILABLE_APPLICATION));
+                .orElseThrow(()-> new ReportException(ReportErrorType.NOT_EXIST_AVAILABLE_APPLICATION));
 
         report.approve();
     }
