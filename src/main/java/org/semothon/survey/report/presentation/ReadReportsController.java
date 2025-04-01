@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.semothon.survey.core.enumerate.ApplicationStatus;
 import org.semothon.survey.report.domain.service.ReadReportUseCase;
 import org.semothon.survey.report.presentation.response.ReadReportsResponse;
+import org.semothon.survey.report.presentation.response.ReportDetailResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,5 +39,12 @@ public class ReadReportsController {
                     : readReportUseCase.execute();
         }
         return ResponseEntity.ok(responses);
+    }
+
+    @GetMapping("/detail")
+    public ResponseEntity<ReportDetailResponse> getReportDetail(
+            @RequestParam("reportId") Long reportId) {
+        ReportDetailResponse response = readReportUseCase.execute(reportId);
+        return ResponseEntity.ok(response);
     }
 }

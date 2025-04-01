@@ -11,6 +11,9 @@ import org.semothon.survey.report.domain.repository.ReportRepository;
 import org.semothon.survey.report.exception.ReportErrorType;
 import org.semothon.survey.report.exception.ReportException;
 import org.semothon.survey.report.presentation.response.ReadReportsResponse;
+import org.semothon.survey.report.presentation.response.ReportDetailResponse;
+import org.semothon.survey.user.domain.entity.User;
+import org.semothon.survey.user.domain.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +25,7 @@ import java.util.Objects;
 @Transactional(readOnly = true)
 public class ReadReportUseCase {
 
+    private final UserRepository userRepository;
     private final ReportRepository reportRepository;
     private final ClassRoomRepository classroomRepository;
     private final ApplicationRepository applicationRepository;
@@ -88,5 +92,22 @@ public class ReadReportUseCase {
                 })
                 .filter(Objects::nonNull)
                 .toList();
+    }
+
+    // 결과보고서 상세조회
+    public ReportDetailResponse execute(Long reportId) {
+        Report report = reportRepository.findById(reportId)
+                .orElseThrow(() -> new ReportException(ReportErrorType.NOT_EXIST_AVAILABLE_REPORT));
+
+        Application application = applicationRepository.findByApplicationId(report.getApplicationId())
+                .orElseThrow(() -> new ReportException(ReportErrorType.NOT_EXIST_AVAILABLE_REPORT));
+
+        ClassRoom classroom = classroomRepository.findById(application.getClassroomId())
+                .orElseThrow(() -> new RuntimeException("Classroom not found for id: " + application.getClassroomId()));
+
+        User user = userRepository.findById(application.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found for id: " + application.getUserId()));
+
+        return ReportDetailResponse.from(report, application, classroom, user);
     }
 }
