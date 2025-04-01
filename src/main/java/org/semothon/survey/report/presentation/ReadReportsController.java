@@ -41,7 +41,7 @@ public class ReadReportsController {
         return ResponseEntity.ok(responses);
     }
 
-    @GetMapping("/detail")
+    @GetMapping("api/report/detail")
     public ResponseEntity<ReportDetailResponse> getReportDetail(
             @RequestParam("reportId") Long reportId) {
         ReportDetailResponse response = readReportUseCase.execute(reportId);
