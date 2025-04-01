@@ -3,6 +3,7 @@ package org.semothon.survey.application.presentation;
 import lombok.RequiredArgsConstructor;
 import org.semothon.survey.application.domain.entity.Application;
 import org.semothon.survey.application.domain.service.ReadApplicationsUseCase;
+import org.semothon.survey.application.presentation.response.ApplicationDetailResponse;
 import org.semothon.survey.application.presentation.response.ReadApplicationsResponse;
 import org.semothon.survey.core.enumerate.ApplicationStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class ReadApplicationsController {
      * - userId가 제공되지 않으면, status에 따라 전체 또는 상태별 조회
      * - userId가 제공되면, status에 따라 해당 사용자 전체 또는 상태별 조회
      */
-    @GetMapping
+    @GetMapping("/api/application")
     public ResponseEntity<List<ReadApplicationsResponse>> getApplications(
             @RequestParam(value = "userId", required = false) String userId,
             @RequestParam(value = "status", required = false) ApplicationStatus status) {
@@ -40,5 +41,12 @@ public class ReadApplicationsController {
         }
 
         return ResponseEntity.ok(responses);
+    }
+
+    @GetMapping("/api/application/detail")
+    public ResponseEntity<ApplicationDetailResponse> getApplicationDetail(
+            @RequestParam("applicationId") Long applicationId) {
+        ApplicationDetailResponse response = readApplicationsUseCase.execute(applicationId);
+        return ResponseEntity.ok(response);
     }
 }

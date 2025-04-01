@@ -4,10 +4,13 @@ import com.amazonaws.services.kms.model.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.semothon.survey.application.domain.entity.Application;
 import org.semothon.survey.application.domain.repository.ApplicationRepository;
+import org.semothon.survey.application.presentation.response.ApplicationDetailResponse;
 import org.semothon.survey.application.presentation.response.ReadApplicationsResponse;
 import org.semothon.survey.classroom.domain.entity.ClassRoom;
 import org.semothon.survey.classroom.domain.repository.ClassRoomRepository;
 import org.semothon.survey.core.enumerate.ApplicationStatus;
+import org.semothon.survey.user.domain.entity.User;
+import org.semothon.survey.user.domain.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +23,7 @@ public class ReadApplicationsUseCase {
 
     private final ApplicationRepository applicationRepository;
     private final ClassRoomRepository classroomRepository;
+    private final UserRepository userRepository;
 
     // 전체 신청서 조회
     public List<ReadApplicationsResponse> execute() {
@@ -67,5 +71,18 @@ public class ReadApplicationsUseCase {
                     return ReadApplicationsResponse.from(application, classroom);
                 })
                 .toList();
+    }
+
+    public ApplicationDetailResponse execute(Long applicationId) {
+        Application application = applicationRepository.findByApplicationId(applicationId)
+                .orElseThrow(() -> new RuntimeException("Application not found for id: " + applicationId));
+
+        User user = userRepository.findById(application.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found for id: " + application.getUserId()));
+
+        ClassRoom classroom = classroomRepository.findById(application.getClassroomId())
+                .orElseThrow(() -> new RuntimeException("Classroom not found for id: " + application.getApplicationId()));
+
+        return ApplicationDetailResponse.from(application, user, classroom);
     }
 }
