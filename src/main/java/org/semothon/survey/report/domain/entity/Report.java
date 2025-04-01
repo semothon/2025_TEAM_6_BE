@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.semothon.survey.core.enumerate.ApplicationStatus;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,5 +23,9 @@ public class Report {
     private ApplicationStatus reportStatus;
 
     private String reportRejectReason;
-    private LocalDateTime reportSubmittedAt;
+    private LocalDate reportSubmittedAt;
+
+    private String reportUrl;
+    private String reportBeforeImage;
+    private String reportAfterImage;
 }
