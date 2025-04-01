@@ -3,7 +3,7 @@ package org.semothon.survey.application.presentation;
 import lombok.RequiredArgsConstructor;
 import org.semothon.survey.application.domain.service.ApproveReservationUseCase;
 import org.semothon.survey.application.domain.service.RejectReservationUseCase;
-import org.semothon.survey.application.presentation.request.RejectRequest;
+import org.semothon.survey.application.presentation.request.ApplicationRejectRequest;
 import org.semothon.survey.core.support.response.ApiResponse;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +21,8 @@ public class ReservationAdminController {
     }
 
     @PostMapping("api/application/reject")
-    public ApiResponse<?> rejectApplication(@RequestBody RejectRequest rejectRequest) {
-        rejectReservationUseCase.execute(rejectRequest);
+    public ApiResponse<?> rejectApplication(@RequestBody ApplicationRejectRequest applicationRejectRequest) {
+        rejectReservationUseCase.execute(applicationRejectRequest);
         return ApiResponse.success();
     }
 }

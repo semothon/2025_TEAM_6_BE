@@ -1,7 +1,7 @@
 package org.semothon.survey.application.presentation.request;
 
 
-public record RejectRequest(
+public record ApplicationRejectRequest(
 
         Long applicationId,
 
