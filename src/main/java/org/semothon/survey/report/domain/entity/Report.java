@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.semothon.survey.core.enumerate.ApplicationStatus;
+import org.semothon.survey.report.exception.ReportErrorType;
+import org.semothon.survey.report.exception.ReportException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,5 +25,27 @@ public class Report {
     private ApplicationStatus reportStatus;
 
     private String reportRejectReason;
-    private LocalDateTime reportSubmittedAt;
+    private LocalDate reportSubmittedAt;
+    private LocalDate reportUpdatedAt;
+
+    private String reportUrl;
+    private String reportBeforeImage;
+    private String reportAfterImage;
+
+    public void approve() {
+        if (this.reportStatus != ApplicationStatus.PENDING) {
+            throw new ReportException(ReportErrorType.CANNOT_APPROVE_STATUS);
+        }
+        this.reportStatus = ApplicationStatus.APPROVED;
+        this.reportUpdatedAt = LocalDate.now();
+    }
+
+    public void reject(String reportRejectReason) {
+        if (this.reportStatus != ApplicationStatus.PENDING) {
+            throw new ReportException(ReportErrorType.CANNOT_REJECT_STATUS);
+        }
+        this.reportStatus = ApplicationStatus.REJECTED;
+        this.reportRejectReason = reportRejectReason;
+        this.reportUpdatedAt = LocalDate.now();
+    }
 }
