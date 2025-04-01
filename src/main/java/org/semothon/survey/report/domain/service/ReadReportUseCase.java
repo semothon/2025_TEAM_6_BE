@@ -3,6 +3,8 @@ package org.semothon.survey.report.domain.service;
 import lombok.RequiredArgsConstructor;
 import org.semothon.survey.application.domain.entity.Application;
 import org.semothon.survey.application.domain.repository.ApplicationRepository;
+import org.semothon.survey.application.exception.ApplicationErrorType;
+import org.semothon.survey.application.exception.ApplicationException;
 import org.semothon.survey.classroom.domain.entity.ClassRoom;
 import org.semothon.survey.classroom.domain.repository.ClassRoomRepository;
 import org.semothon.survey.core.enumerate.ApplicationStatus;
@@ -14,6 +16,8 @@ import org.semothon.survey.report.presentation.response.ReadReportsResponse;
 import org.semothon.survey.report.presentation.response.ReportDetailResponse;
 import org.semothon.survey.user.domain.entity.User;
 import org.semothon.survey.user.domain.repository.UserRepository;
+import org.semothon.survey.user.exception.UserErrorType;
+import org.semothon.survey.user.exception.UserException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,7 +40,7 @@ public class ReadReportUseCase {
         return reports.stream()
                 .map(report -> {
                     Application application = applicationRepository.findByApplicationId(report.getApplicationId())
-                            .orElseThrow(() -> new ReportException(ReportErrorType.NOT_EXIST_AVAILABLE_REPORT));
+                            .orElseThrow(() -> new ApplicationException(ApplicationErrorType.NOT_EXIST_AVAILABLE_APPLICATION));
                     ClassRoom classroom = classroomRepository.findById(application.getClassroomId())
                             .orElseThrow(() -> new RuntimeException("Classroom not found for id: " + application.getClassroomId()));
                     return ReadReportsResponse.from(report, application, classroom);
@@ -106,7 +110,7 @@ public class ReadReportUseCase {
                 .orElseThrow(() -> new RuntimeException("Classroom not found for id: " + application.getClassroomId()));
 
         User user = userRepository.findById(application.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found for id: " + application.getUserId()));
+                .orElseThrow(() -> new UserException(UserErrorType.USER_NOT_FOUND));
 
         return ReportDetailResponse.from(report, application, classroom, user);
     }

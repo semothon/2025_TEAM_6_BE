@@ -4,6 +4,8 @@ import com.amazonaws.services.kms.model.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.semothon.survey.application.domain.entity.Application;
 import org.semothon.survey.application.domain.repository.ApplicationRepository;
+import org.semothon.survey.application.exception.ApplicationErrorType;
+import org.semothon.survey.application.exception.ApplicationException;
 import org.semothon.survey.application.presentation.response.ApplicationDetailResponse;
 import org.semothon.survey.application.presentation.response.ReadApplicationsResponse;
 import org.semothon.survey.classroom.domain.entity.ClassRoom;
@@ -11,6 +13,8 @@ import org.semothon.survey.classroom.domain.repository.ClassRoomRepository;
 import org.semothon.survey.core.enumerate.ApplicationStatus;
 import org.semothon.survey.user.domain.entity.User;
 import org.semothon.survey.user.domain.repository.UserRepository;
+import org.semothon.survey.user.exception.UserErrorType;
+import org.semothon.survey.user.exception.UserException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +35,7 @@ public class ReadApplicationsUseCase {
         return applications.stream()
                 .map(application -> {
                     ClassRoom classroom = classroomRepository.findById(application.getClassroomId())
-                            .orElseThrow(() -> new RuntimeException("Classroom not found for id: " + application.getClassroomId()));
+                            .orElseThrow(() -> new ApplicationException(ApplicationErrorType.NOT_EXIST_AVAILABLE_APPLICATION));
                     return ReadApplicationsResponse.from(application, classroom);
                 })
                 .toList();
@@ -43,7 +47,7 @@ public class ReadApplicationsUseCase {
         return applications.stream()
                 .map(application -> {
                     ClassRoom classroom = classroomRepository.findById(application.getClassroomId())
-                            .orElseThrow(() -> new RuntimeException("Classroom not found for id: " + application.getClassroomId()));
+                            .orElseThrow(() -> new ApplicationException(ApplicationErrorType.NOT_EXIST_AVAILABLE_APPLICATION));
                     return ReadApplicationsResponse.from(application, classroom);
                 })
                 .toList();
@@ -55,7 +59,7 @@ public class ReadApplicationsUseCase {
         return applications.stream()
                 .map(application -> {
                     ClassRoom classroom = classroomRepository.findById(application.getClassroomId())
-                            .orElseThrow(() -> new RuntimeException("Classroom not found for id: " + application.getClassroomId()));
+                            .orElseThrow(() -> new ApplicationException(ApplicationErrorType.NOT_EXIST_AVAILABLE_APPLICATION));
                     return ReadApplicationsResponse.from(application, classroom);
                 })
                 .toList();
@@ -67,7 +71,7 @@ public class ReadApplicationsUseCase {
         return applications.stream()
                 .map(application -> {
                     ClassRoom classroom = classroomRepository.findById(application.getClassroomId())
-                            .orElseThrow(() -> new RuntimeException("Classroom not found for id: " + application.getClassroomId()));
+                            .orElseThrow(() -> new ApplicationException(ApplicationErrorType.NOT_EXIST_AVAILABLE_APPLICATION));
                     return ReadApplicationsResponse.from(application, classroom);
                 })
                 .toList();
@@ -75,10 +79,10 @@ public class ReadApplicationsUseCase {
 
     public ApplicationDetailResponse execute(Long applicationId) {
         Application application = applicationRepository.findByApplicationId(applicationId)
-                .orElseThrow(() -> new RuntimeException("Application not found for id: " + applicationId));
+                .orElseThrow(() -> new ApplicationException(ApplicationErrorType.NOT_EXIST_AVAILABLE_APPLICATION));
 
         User user = userRepository.findById(application.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found for id: " + application.getUserId()));
+                .orElseThrow(() -> new UserException(UserErrorType.USER_NOT_FOUND));
 
         ClassRoom classroom = classroomRepository.findById(application.getClassroomId())
                 .orElseThrow(() -> new RuntimeException("Classroom not found for id: " + application.getApplicationId()));
