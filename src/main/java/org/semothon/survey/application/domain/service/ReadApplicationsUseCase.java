@@ -10,6 +10,8 @@ import org.semothon.survey.application.presentation.response.ApplicationDetailRe
 import org.semothon.survey.application.presentation.response.ReadApplicationsResponse;
 import org.semothon.survey.classroom.domain.entity.ClassRoom;
 import org.semothon.survey.classroom.domain.repository.ClassRoomRepository;
+import org.semothon.survey.classroom.exception.ClassRoomErrorType;
+import org.semothon.survey.classroom.exception.ClassRoomException;
 import org.semothon.survey.core.enumerate.ApplicationStatus;
 import org.semothon.survey.user.domain.entity.User;
 import org.semothon.survey.user.domain.repository.UserRepository;
@@ -85,7 +87,7 @@ public class ReadApplicationsUseCase {
                 .orElseThrow(() -> new UserException(UserErrorType.USER_NOT_FOUND));
 
         ClassRoom classroom = classroomRepository.findById(application.getClassroomId())
-                .orElseThrow(() -> new RuntimeException("Classroom not found for id: " + application.getApplicationId()));
+                .orElseThrow(() -> new ClassRoomException(ClassRoomErrorType.NOT_EXIST_AVAILABLE_CLASSROOM));
 
         return ApplicationDetailResponse.from(application, user, classroom);
     }
