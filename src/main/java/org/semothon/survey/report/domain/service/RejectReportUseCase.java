@@ -18,8 +18,8 @@ public class RejectReportUseCase {
 
     @Transactional
     public void execute(ReportRejectRequest reportRejectRequest) {
-        Report report = reportRepository.findByApplicationId(reportRejectRequest.reportId())
-                .orElseThrow(()-> new ReportException(ReportErrorType.NOT_EXIST_AVAILABLE_APPLICATION));
+        Report report = reportRepository.findByReportId(reportRejectRequest.reportId())
+                .orElseThrow(()-> new ReportException(ReportErrorType.NOT_EXIST_AVAILABLE_REPORT));
 
         report.reject(reportRejectRequest.reportRejectReason());
         reportRepository.save(report);

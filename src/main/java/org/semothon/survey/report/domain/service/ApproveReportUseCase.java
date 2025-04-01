@@ -17,8 +17,8 @@ public class ApproveReportUseCase {
 
     @Transactional
     public void execute(Long reportId) {
-        Report report = reportRepository.findByApplicationId(reportId)
-                .orElseThrow(()-> new ReportException(ReportErrorType.NOT_EXIST_AVAILABLE_APPLICATION));
+        Report report = reportRepository.findByReportId(reportId)
+                .orElseThrow(()-> new ReportException(ReportErrorType.NOT_EXIST_AVAILABLE_REPORT));
 
         report.approve();
     }
