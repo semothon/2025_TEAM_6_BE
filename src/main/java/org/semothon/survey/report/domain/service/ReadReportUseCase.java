@@ -7,6 +7,8 @@ import org.semothon.survey.application.exception.ApplicationErrorType;
 import org.semothon.survey.application.exception.ApplicationException;
 import org.semothon.survey.classroom.domain.entity.ClassRoom;
 import org.semothon.survey.classroom.domain.repository.ClassRoomRepository;
+import org.semothon.survey.classroom.exception.ClassRoomErrorType;
+import org.semothon.survey.classroom.exception.ClassRoomException;
 import org.semothon.survey.core.enumerate.ApplicationStatus;
 import org.semothon.survey.report.domain.entity.Report;
 import org.semothon.survey.report.domain.repository.ReportRepository;
@@ -42,7 +44,7 @@ public class ReadReportUseCase {
                     Application application = applicationRepository.findByApplicationId(report.getApplicationId())
                             .orElseThrow(() -> new ApplicationException(ApplicationErrorType.NOT_EXIST_AVAILABLE_APPLICATION));
                     ClassRoom classroom = classroomRepository.findById(application.getClassroomId())
-                            .orElseThrow(() -> new RuntimeException("Classroom not found for id: " + application.getClassroomId()));
+                            .orElseThrow(() -> new ClassRoomException(ClassRoomErrorType.NOT_EXIST_AVAILABLE_CLASSROOM));
                     return ReadReportsResponse.from(report, application, classroom);
                 })
                 .toList();
@@ -56,7 +58,7 @@ public class ReadReportUseCase {
                     Application application = applicationRepository.findByApplicationId(report.getApplicationId())
                             .orElseThrow(() -> new ReportException(ReportErrorType.NOT_EXIST_AVAILABLE_REPORT));
                     ClassRoom classroom = classroomRepository.findById(application.getClassroomId())
-                            .orElseThrow(() -> new RuntimeException("Classroom not found for id: " + application.getClassroomId()));
+                            .orElseThrow(() -> new ClassRoomException(ClassRoomErrorType.NOT_EXIST_AVAILABLE_CLASSROOM));
                     return ReadReportsResponse.from(report, application, classroom);
                 })
                 .toList();
@@ -73,7 +75,7 @@ public class ReadReportUseCase {
                         return null;
                     }
                     ClassRoom classroom = classroomRepository.findById(application.getClassroomId())
-                            .orElseThrow(() -> new RuntimeException("Classroom not found for id: " + application.getClassroomId()));
+                            .orElseThrow(() -> new ClassRoomException(ClassRoomErrorType.NOT_EXIST_AVAILABLE_CLASSROOM));
                     return ReadReportsResponse.from(report, application, classroom);
                 })
                 .filter(Objects::nonNull)
@@ -91,7 +93,7 @@ public class ReadReportUseCase {
                         return null;
                     }
                     ClassRoom classroom = classroomRepository.findById(application.getClassroomId())
-                            .orElseThrow(() -> new RuntimeException("Classroom not found for id: " + application.getClassroomId()));
+                            .orElseThrow(() -> new ClassRoomException(ClassRoomErrorType.NOT_EXIST_AVAILABLE_CLASSROOM));
                     return ReadReportsResponse.from(report, application, classroom);
                 })
                 .filter(Objects::nonNull)
@@ -107,7 +109,7 @@ public class ReadReportUseCase {
                 .orElseThrow(() -> new ReportException(ReportErrorType.NOT_EXIST_AVAILABLE_REPORT));
 
         ClassRoom classroom = classroomRepository.findById(application.getClassroomId())
-                .orElseThrow(() -> new RuntimeException("Classroom not found for id: " + application.getClassroomId()));
+                .orElseThrow(() -> new ClassRoomException(ClassRoomErrorType.NOT_EXIST_AVAILABLE_CLASSROOM));
 
         User user = userRepository.findById(application.getUserId())
                 .orElseThrow(() -> new UserException(UserErrorType.USER_NOT_FOUND));

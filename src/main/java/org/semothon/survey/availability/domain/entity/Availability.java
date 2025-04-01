@@ -16,11 +16,12 @@ public class Availability {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long availabilityId;
 
-    private Long roomId;  //FK(Classroom.classroomId)
+    private Long classroomId;  //FK(Classroom.classroomId)
 
     private LocalDate availabilityDate;
     private LocalTime availabilityStart;
     private LocalTime availabilityEnd;
 
     private String availabilityResponsibility; // 등록자 (관리자 userId)
+
 }
