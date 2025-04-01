@@ -1,4 +1,8 @@
 package org.semothon.survey.report.presentation.request;
 
-public class ReportRejectRequest {
-}
+public record ReportRejectRequest (
+
+    Long reportId,
+
+    String reportRejectReason
+){}
