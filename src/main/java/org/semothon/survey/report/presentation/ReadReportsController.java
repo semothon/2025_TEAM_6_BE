@@ -2,10 +2,10 @@ package org.semothon.survey.report.presentation;
 
 import lombok.RequiredArgsConstructor;
 import org.semothon.survey.core.enumerate.ApplicationStatus;
+import org.semothon.survey.core.support.response.ApiResponse;
 import org.semothon.survey.report.domain.service.ReadReportUseCase;
 import org.semothon.survey.report.presentation.response.ReadReportsResponse;
 import org.semothon.survey.report.presentation.response.ReportDetailResponse;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +24,7 @@ public class ReadReportsController {
      * - userId가 제공되면 해당 사용자의 보고서만 조회하고, status가 있다면 상태 필터링을 추가합니다.
      */
     @GetMapping("/api/report")
-    public ResponseEntity<List<ReadReportsResponse>> getReports(
+    public ApiResponse<List<ReadReportsResponse>> getReports(
             @RequestParam(value = "userId", required = false) String userId,
             @RequestParam(value = "status", required = false) ApplicationStatus status) {
 
@@ -38,13 +38,13 @@ public class ReadReportsController {
                     ? readReportUseCase.execute(status)
                     : readReportUseCase.execute();
         }
-        return ResponseEntity.ok(responses);
+        return ApiResponse.success(responses);
     }
 
     @GetMapping("api/report/detail")
-    public ResponseEntity<ReportDetailResponse> getReportDetail(
+    public ApiResponse<ReportDetailResponse> getReportDetail(
             @RequestParam("reportId") Long reportId) {
         ReportDetailResponse response = readReportUseCase.execute(reportId);
-        return ResponseEntity.ok(response);
+        return ApiResponse.success(response);
     }
 }

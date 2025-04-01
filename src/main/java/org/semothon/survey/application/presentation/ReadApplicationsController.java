@@ -6,6 +6,7 @@ import org.semothon.survey.application.domain.service.ReadApplicationsUseCase;
 import org.semothon.survey.application.presentation.response.ApplicationDetailResponse;
 import org.semothon.survey.application.presentation.response.ReadApplicationsResponse;
 import org.semothon.survey.core.enumerate.ApplicationStatus;
+import org.semothon.survey.core.support.response.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +25,7 @@ public class ReadApplicationsController {
      * - userId가 제공되면, status에 따라 해당 사용자 전체 또는 상태별 조회
      */
     @GetMapping("/api/application")
-    public ResponseEntity<List<ReadApplicationsResponse>> getApplications(
+    public ApiResponse<List<ReadApplicationsResponse>> getApplications(
             @RequestParam(value = "userId", required = false) String userId,
             @RequestParam(value = "status", required = false) ApplicationStatus status) {
 
@@ -40,13 +41,13 @@ public class ReadApplicationsController {
                     : readApplicationsUseCase.execute();
         }
 
-        return ResponseEntity.ok(responses);
+        return ApiResponse.success(responses);
     }
 
     @GetMapping("/api/application/detail")
-    public ResponseEntity<ApplicationDetailResponse> getApplicationDetail(
+    public ApiResponse<ApplicationDetailResponse> getApplicationDetail(
             @RequestParam("applicationId") Long applicationId) {
         ApplicationDetailResponse response = readApplicationsUseCase.execute(applicationId);
-        return ResponseEntity.ok(response);
+        return ApiResponse.success(response);
     }
 }
