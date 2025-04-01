@@ -3,6 +3,7 @@ package org.semothon.survey.availability.domain.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.semothon.survey.core.enumerate.ApplicationStatus;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -22,6 +23,8 @@ public class Availability {
     private LocalTime availabilityStart;
     private LocalTime availabilityEnd;
 
+    @Enumerated(EnumType.STRING)
+    private ApplicationStatus reservationStatus;
     private String availabilityResponsibility; // 등록자 (관리자 userId)
 
 }
