@@ -40,8 +40,8 @@ public class Application {
     private LocalDate applicationApprovedAt;
     private String applicationApprover;
 
-    @Enumerated(EnumType.STRING)
     @Builder.Default
+    @Enumerated(EnumType.STRING)
     private ApplicationStatus applicationStatus =ApplicationStatus.PENDING;
 
     private String applicationRejectReason;
