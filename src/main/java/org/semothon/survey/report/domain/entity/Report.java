@@ -51,4 +51,12 @@ public class Report {
         this.reportRejectReason = reportRejectReason;
         this.reportUpdatedAt = LocalDate.now();
     }
+
+    public static Report create(Long applicationId, String reportUrl) {
+        return Report.builder()
+                .applicationId(applicationId)
+                .reportUrl(reportUrl)
+                // reportStatus와 reportSubmittedAt은 @Builder.Default로 자동 적용됨
+                .build();
+    }
 }
