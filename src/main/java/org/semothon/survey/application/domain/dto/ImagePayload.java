@@ -1,4 +1,4 @@
-package org.semothon.survey.report.dto;
+package org.semothon.survey.application.domain.dto;
 
 public record ImagePayload(
         String format,
