@@ -6,17 +6,22 @@ import org.semothon.survey.application.domain.dto.response.ClovaOcrResponse;
 import org.semothon.survey.application.domain.dto.response.ReadOcrResponse;
 import org.semothon.survey.application.util.MessagePayloadBuilder;
 import org.semothon.survey.application.util.OcrResultParser;
+import org.semothon.survey.core.util.S3UploadService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @Component
-public class OcrUseCase {
+public class ApplicationPdfUploadUseCase {
     private final ClovaOcrClient clovaOcrClient;
     private final MessagePayloadBuilder messagePayloadBuilder;
     private final OcrResultParser ocrResultParser;
+    private final S3UploadService s3UploadService;
 
-    public ReadOcrResponse execute(MultipartFile file) {
+    public ReadOcrResponse executeOCR(MultipartFile file) {
+
+        String fileUrl = s3UploadService.uploadFile(file);
+
         // 메시지 JSON 생성
         String messageJson = messagePayloadBuilder.buildMessagePayload(file);
 
@@ -37,6 +42,8 @@ public class OcrUseCase {
         finalResult.append("사용 인원: ").append(extractedInfo.getUsageNumber()).append("\n");
 
         // DTO 생성 via from 메서드
-        return ReadOcrResponse.from(extractedInfo.getDetailText(), extractedInfo.getUsageNumber());
+        ReadOcrResponse ocrResponse =  ReadOcrResponse.from(extractedInfo.getDetailText(), extractedInfo.getUsageNumber(), fileUrl);
+
+        return ocrResponse;
     }
 }
