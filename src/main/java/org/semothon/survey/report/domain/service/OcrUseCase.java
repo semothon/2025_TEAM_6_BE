@@ -2,10 +2,10 @@ package org.semothon.survey.report.domain.service;
 
 
 import lombok.RequiredArgsConstructor;
-import org.semothon.survey.report.ClovaOcrClient;
+import org.semothon.survey.application.ClovaOcrClient;
 import org.semothon.survey.report.dto.response.ClovaOcrResponse;
-import org.semothon.survey.report.util.MessagePayloadBuilder;
-import org.semothon.survey.report.util.OcrResultParser;
+import org.semothon.survey.application.util.MessagePayloadBuilder;
+import org.semothon.survey.application.util.OcrResultParser;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 

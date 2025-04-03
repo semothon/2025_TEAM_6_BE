@@ -1,9 +1,8 @@
-package org.semothon.survey.report;
+package org.semothon.survey.application;
 
 import lombok.RequiredArgsConstructor;
 import org.semothon.survey.core.support.response.ApiResponse;
 import org.semothon.survey.report.domain.service.OcrUseCase;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

@@ -1,4 +1,4 @@
-package org.semothon.survey.report.util;
+package org.semothon.survey.application.util;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;

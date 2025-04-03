@@ -1,4 +1,4 @@
-package org.semothon.survey.report.util;
+package org.semothon.survey.application.util;
 
 import org.semothon.survey.report.dto.response.ClovaOcrResponse;
 import org.springframework.stereotype.Component;

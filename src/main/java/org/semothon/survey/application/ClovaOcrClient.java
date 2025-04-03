@@ -1,4 +1,4 @@
-package org.semothon.survey.report;
+package org.semothon.survey.application;
 
 import org.semothon.survey.core.configuration.ClovaOcrClientConfiguration;
 import org.semothon.survey.report.dto.response.ClovaOcrResponse;
