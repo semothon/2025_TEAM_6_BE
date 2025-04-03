@@ -14,7 +14,7 @@ public class SubmitApplicationController {
 
     private final SubmitApplicationUseCase submitApplicationUseCase;
 
-    @PostMapping("/api/application/submit")
+    @PostMapping("/api/application")
     public ApiResponse<?> submitApplication(@RequestBody ApplicationSubmitRequest request) {
         submitApplicationUseCase.submitApplication(request);
         return ApiResponse.success();
