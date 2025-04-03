@@ -24,7 +24,7 @@ public record MonthlyResevedTimeResponse (
                 availability.getAvailabilityStart(),
                 availability.getAvailabilityEnd(),
                 availability.getReservationStatus(),
-                availability.getAvailabilityResponsibility()
+                availability.getUserId()
         );
     }
 }

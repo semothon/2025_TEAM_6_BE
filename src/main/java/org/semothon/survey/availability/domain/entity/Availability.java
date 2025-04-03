@@ -3,6 +3,7 @@ package org.semothon.survey.availability.domain.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.semothon.survey.core.enumerate.ApplicationStatus;
 
 import java.time.LocalDate;
@@ -12,12 +13,14 @@ import java.time.LocalTime;
 @Table(name = "tb_availability")
 @Data
 @NoArgsConstructor
+@SuperBuilder
 public class Availability {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long availabilityId;
-
     private Long classroomId;  //FK(Classroom.classroomId)
+    private String userId;
 
     private LocalDate availabilityDate;
     private LocalTime availabilityStart;
@@ -25,6 +28,16 @@ public class Availability {
 
     @Enumerated(EnumType.STRING)
     private ApplicationStatus reservationStatus;
-    private String availabilityResponsibility; // 등록자 (관리자 userId)
 
+    public static Availability create(Long classroomId, LocalDate date, LocalTime start,
+                                                       LocalTime end, String reserveUser) {
+        return Availability.builder()
+                .classroomId(classroomId)
+                .userId(reserveUser)
+                .availabilityDate(date)
+                .availabilityStart(start)
+                .availabilityEnd(end)
+                .reservationStatus(ApplicationStatus.PENDING)
+                .build();
+    }
 }
