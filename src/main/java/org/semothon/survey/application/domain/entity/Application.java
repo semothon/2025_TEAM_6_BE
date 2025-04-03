@@ -1,10 +1,14 @@
 package org.semothon.survey.application.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import net.bytebuddy.implementation.bind.annotation.Super;
 import org.semothon.survey.application.exception.ApplicationErrorType;
 import org.semothon.survey.application.exception.ApplicationException;
+import org.semothon.survey.application.presentation.request.ApplicationSubmitRequest;
 import org.semothon.survey.core.enumerate.ApplicationStatus;
 
 import java.time.LocalDate;
@@ -14,6 +18,7 @@ import java.time.LocalTime;
 @Table(name = "tb_application")
 @Data
 @NoArgsConstructor
+@SuperBuilder
 public class Application {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,16 +33,32 @@ public class Application {
     private LocalDate applicationUseDate;
     private LocalTime applicationStart;
     private LocalTime applicationEnd;
-    private LocalDate applicationDate;
+
+    @Builder.Default
+    private LocalDate applicationDate = LocalDate.now();
 
     private LocalDate applicationApprovedAt;
     private String applicationApprover;
 
     @Enumerated(EnumType.STRING)
-    private ApplicationStatus applicationStatus;
+    @Builder.Default
+    private ApplicationStatus applicationStatus =ApplicationStatus.PENDING;
 
     private String applicationRejectReason;
     private String applicationUrl;
+
+    public static Application create(ApplicationSubmitRequest request) {
+        return Application.builder()
+                .userId(request.userId())
+                .classroomId(request.classroomId())
+                .applicationUseDate(request.applicationUseDate())
+                .applicationStart(request.applicationStart())
+                .applicationEnd(request.applicationEnd())
+                .applicationPurpose(request.applicationPurpose())
+                .applicationParticipants(request.applicationParticipants())
+                .applicationUrl(request.applicationUrl())
+                .build();
+    }
 
     public void approve() {
         if (this.applicationStatus != ApplicationStatus.PENDING) {

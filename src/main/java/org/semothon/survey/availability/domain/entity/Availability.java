@@ -1,6 +1,7 @@
 package org.semothon.survey.availability.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -27,7 +28,8 @@ public class Availability {
     private LocalTime availabilityEnd;
 
     @Enumerated(EnumType.STRING)
-    private ApplicationStatus reservationStatus;
+    @Builder.Default
+    private ApplicationStatus reservationStatus = ApplicationStatus.PENDING;
 
     public static Availability create(Long classroomId, LocalDate date, LocalTime start,
                                                        LocalTime end, String reserveUser) {
@@ -37,7 +39,6 @@ public class Availability {
                 .availabilityDate(date)
                 .availabilityStart(start)
                 .availabilityEnd(end)
-                .reservationStatus(ApplicationStatus.PENDING)
                 .build();
     }
 }
