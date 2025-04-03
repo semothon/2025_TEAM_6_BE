@@ -3,8 +3,8 @@ package org.semothon.survey.application.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.semothon.survey.report.dto.ImagePayload;
-import org.semothon.survey.report.dto.MessagePayload;
+import org.semothon.survey.application.domain.dto.ImagePayload;
+import org.semothon.survey.application.domain.dto.MessagePayload;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,7 +1,7 @@
 package org.semothon.survey.application;
 
 import org.semothon.survey.core.configuration.ClovaOcrClientConfiguration;
-import org.semothon.survey.report.dto.response.ClovaOcrResponse;
+import org.semothon.survey.application.domain.dto.response.ClovaOcrResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;

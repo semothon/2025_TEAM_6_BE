@@ -1,4 +1,4 @@
-package org.semothon.survey.report.dto.response;
+package org.semothon.survey.application.domain.dto.response;
 
 import java.util.List;
 

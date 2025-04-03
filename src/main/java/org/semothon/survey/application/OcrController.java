@@ -1,8 +1,9 @@
 package org.semothon.survey.application;
 
 import lombok.RequiredArgsConstructor;
+import org.semothon.survey.application.domain.dto.response.ReadOcrResponse;
 import org.semothon.survey.core.support.response.ApiResponse;
-import org.semothon.survey.report.domain.service.OcrUseCase;
+import org.semothon.survey.application.domain.service.OcrUseCase;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,8 +17,8 @@ public class OcrController {
     private final OcrUseCase ocrService;
 
     @PostMapping("/upload")
-    public ApiResponse<String> uploadImage(@RequestParam("file") MultipartFile file) {
-        String result = ocrService.execute(file);
+    public ApiResponse<ReadOcrResponse> uploadImage(@RequestParam("file") MultipartFile file) {
+        ReadOcrResponse result = ocrService.execute(file);
         return ApiResponse.success(result);
     }
 }
