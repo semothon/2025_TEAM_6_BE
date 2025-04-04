@@ -13,7 +13,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000",
-                        "https://kobaco-six.vercel.app",
+                        "https://kh-application-share-view.vercel.app",
                         "http://localhost:5173",
                         "https://itsmeweb.store")
                 .allowedMethods("GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
