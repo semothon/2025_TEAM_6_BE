@@ -14,6 +14,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000",
                         "https://kh-application-share-view.vercel.app",
+                        "https://2025-team-6-fe.vercel.app",
                         "http://localhost:5173",
                         "https://itsmeweb.store")
                 .allowedMethods("GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
