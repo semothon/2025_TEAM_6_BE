@@ -7,6 +7,8 @@ import org.semothon.survey.application.exception.ApplicationErrorType;
 import org.semothon.survey.application.exception.ApplicationException;
 import org.semothon.survey.availability.domain.entity.Availability;
 import org.semothon.survey.availability.domain.repository.AvailabilityRepository;
+import org.semothon.survey.availability.exception.AvailabilityErrorType;
+import org.semothon.survey.availability.exception.AvailabilityException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,8 +25,8 @@ public class ApproveReservationUseCase {
         Application application = applicationRepository.findByApplicationId(applicationId)
                 .orElseThrow(()-> new ApplicationException(ApplicationErrorType.NOT_EXIST_AVAILABLE_APPLICATION));
         Availability availability = availabilityRepository.findById(application.getAvailabilityId())
-                .orElseThrow(()-> new ApplicationException(ApplicationErrorType.NOT_EXIST_AVAILABLE_APPLICATION));
+                .orElseThrow(()-> new AvailabilityException(AvailabilityErrorType.NOT_EXIST_AVAILABLE_APPLICATION));
         application.approve();
-
+        availability.approve();
     }
 }

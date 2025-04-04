@@ -51,7 +51,7 @@ public class Availability {
         this.reservationStatus = ApplicationStatus.APPROVED;
     }
 
-    public void reject(String applicationRejectReason) {
+    public void reject() {
         if (this.reservationStatus != ApplicationStatus.PENDING) {
             throw new ApplicationException(ApplicationErrorType.CANNOT_REJECT_STATUS);
         }
