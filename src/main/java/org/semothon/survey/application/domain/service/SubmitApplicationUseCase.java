@@ -31,7 +31,7 @@ public class SubmitApplicationUseCase {
                 request.userId()   // 예약 신청한 사용자 ID
         );
         availabilityRepository.save(availability);
-        savedApplication.setApplicationId(availability.getAvailabilityId());
+        savedApplication.setAvailabilityId(availability.getAvailabilityId());
 
         return savedApplication;
     }
