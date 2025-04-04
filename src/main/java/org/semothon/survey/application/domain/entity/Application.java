@@ -26,6 +26,7 @@ public class Application {
 
     private String userId;  //FK(User.userId)
     private Long classroomId;    //FK(Classroom.classroomId)
+    private Long availabilityId;
 
     private String applicationPurpose;
     private Integer applicationParticipants;
