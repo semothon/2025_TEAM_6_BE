@@ -9,6 +9,7 @@ import net.bytebuddy.implementation.bind.annotation.Super;
 import org.semothon.survey.application.exception.ApplicationErrorType;
 import org.semothon.survey.application.exception.ApplicationException;
 import org.semothon.survey.application.presentation.request.ApplicationSubmitRequest;
+import org.semothon.survey.availability.domain.entity.Availability;
 import org.semothon.survey.core.enumerate.ApplicationStatus;
 
 import java.time.LocalDate;
