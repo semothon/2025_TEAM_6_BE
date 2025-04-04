@@ -8,9 +8,11 @@ public record UserInfoResponse (
 
         String userName,
 
-        UserRole userRole
+        UserRole userRole,
+
+        String userNumber
 ){
-    public static UserInfoResponse of(String userId, String userName, UserRole userRole) {
-        return new UserInfoResponse(userId, userName, userRole);
+    public static UserInfoResponse of(String userId, String userName, UserRole userRole, String userNumber) {
+        return new UserInfoResponse(userId, userName, userRole, userNumber);
     }
 }

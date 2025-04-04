@@ -21,6 +21,6 @@ public class ReadUserInfoUseCase {
         User user = userRepository.findByUserIdAndUserRole(userId, userRole)
                 .orElseThrow(()-> new UserException(UserErrorType.NOT_EXIST_AVAILABLE_USER));
 
-        return UserInfoResponse.of(user.getUserId(), user.getUserName(), user.getUserRole());
+        return UserInfoResponse.of(user.getUserId(), user.getUserName(), user.getUserRole(), user.getUserNumber());
     }
 }
