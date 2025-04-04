@@ -6,9 +6,12 @@ import org.semothon.survey.classroom.domain.entity.ClassRoom;
 import org.semothon.survey.classroom.domain.repository.ClassRoomRepository;
 import org.semothon.survey.classroom.presentation.response.RoomListResponse;
 import org.semothon.survey.classroom.presentation.response.RoomPreviewInfo;
+import org.semothon.survey.core.enumerate.ApplicationStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,5 +40,14 @@ public class ReadRoomListUseCase {
         Integer count = classRooms.size();
 
         return RoomListResponse.of(count, roomPreviewInfos);
+    }
+
+    public List<ClassRoom> execute(LocalDate date, LocalTime startTime, LocalTime endTime) {
+        return classRoomRepository.findAvailableClassrooms(
+                date,
+                startTime,
+                endTime,
+                List.of(ApplicationStatus.PENDING, ApplicationStatus.APPROVED)
+        );
     }
 }
