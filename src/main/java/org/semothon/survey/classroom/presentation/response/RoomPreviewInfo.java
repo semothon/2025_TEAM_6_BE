@@ -8,13 +8,16 @@ public record RoomPreviewInfo(
 
         Integer classroomNumber,
 
-        Integer classroomCapacity
+        Integer classroomCapacity,
+
+        String classroomImage
 ) {
     public static RoomPreviewInfo from(ClassRoom classroom) {
         return new RoomPreviewInfo(
                 classroom.getClassroomId(),
                 classroom.getClassroomNumber(),
-                classroom.getClassroomCapacity()
+                classroom.getClassroomCapacity(),
+                classroom.getClassroomImages().getFirst()
         );
     }
 }

@@ -28,7 +28,8 @@ public class ReadRoomListUseCase {
                 .map(classRoom -> new RoomPreviewInfo(
                         classRoom.getClassroomId(),
                         classRoom.getClassroomNumber(),
-                        classRoom.getClassroomCapacity()
+                        classRoom.getClassroomCapacity(),
+                        classRoom.getClassroomImages().getFirst()
                 ))
                 .collect(Collectors.toList());
 
