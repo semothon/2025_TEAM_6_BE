@@ -1,5 +1,6 @@
 package org.semothon.survey.application.presentation;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.semothon.survey.application.domain.service.SubmitApplicationUseCase;
 import org.semothon.survey.application.presentation.request.ApplicationSubmitRequest;
@@ -15,7 +16,7 @@ public class SubmitApplicationController {
     private final SubmitApplicationUseCase submitApplicationUseCase;
 
     @PostMapping("/api/application")
-    public ApiResponse<?> submitApplication(@RequestBody ApplicationSubmitRequest request) {
+    public ApiResponse<?> submitApplication(@Valid @RequestBody ApplicationSubmitRequest request) {
         submitApplicationUseCase.submitApplication(request);
         return ApiResponse.success();
     }

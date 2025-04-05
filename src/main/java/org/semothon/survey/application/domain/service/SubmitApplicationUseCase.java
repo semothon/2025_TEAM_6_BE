@@ -18,7 +18,7 @@ public class SubmitApplicationUseCase {
     private final ApplicationRepository applicationRepository;
     private final AvailabilityRepository availabilityRepository;
 
-    public Application submitApplication(@Valid ApplicationSubmitRequest request) {
+    public Application submitApplication(ApplicationSubmitRequest request) {
         // Application 생성 및 저장
         Application application = Application.create(request);
         Application savedApplication = applicationRepository.save(application);
