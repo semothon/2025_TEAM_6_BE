@@ -1,5 +1,6 @@
 package org.semothon.survey.application.domain.service;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.semothon.survey.application.domain.entity.Application;
 import org.semothon.survey.application.domain.repository.ApplicationRepository;
@@ -17,7 +18,7 @@ public class SubmitApplicationUseCase {
     private final ApplicationRepository applicationRepository;
     private final AvailabilityRepository availabilityRepository;
 
-    public Application submitApplication(ApplicationSubmitRequest request) {
+    public Application submitApplication(@Valid ApplicationSubmitRequest request) {
         // Application 생성 및 저장
         Application application = Application.create(request);
         Application savedApplication = applicationRepository.save(application);
