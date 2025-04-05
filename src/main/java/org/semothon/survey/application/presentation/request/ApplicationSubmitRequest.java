@@ -11,22 +11,22 @@ public record ApplicationSubmitRequest(
         @NotEmpty(message = "userId이 대여신청 요청값에 없습니다.")
         String userId,
 
-        @NotEmpty(message = "classroomId이 대여신청 요청값에 없습니다.")
+        @NotNull(message = "classroomId이 대여신청 요청값에 없습니다.")
         Long classroomId,
 
-        @NotEmpty(message = "applicationUseDate이 대여신청 요청값에 없습니다.")
+        @NotNull(message = "applicationUseDate이 대여신청 요청값에 없습니다.")
         LocalDate applicationUseDate,
 
-        @NotEmpty(message = "applicationStart이 대여신청 요청값에 없습니다.")
+        @NotNull(message = "applicationStart이 대여신청 요청값에 없습니다.")
         LocalTime applicationStart,
 
-        @NotEmpty(message = "applicationEnd이 대여신청 요청값에 없습니다.")
+        @NotNull(message = "applicationEnd이 대여신청 요청값에 없습니다.")
         LocalTime applicationEnd,
 
         @NotEmpty(message = "applicationPurpose이 대여신청 요청값에 없습니다.")
         String applicationPurpose,
 
-        @NotEmpty(message = "applicationParticipants이 대여신청 요청값에 없습니다.")
+        @NotNull(message = "applicationParticipants이 대여신청 요청값에 없습니다.")
         Integer applicationParticipants,
 
         @NotEmpty(message = "applicationUrl이 대여신청 요청값에 없습니다.")
