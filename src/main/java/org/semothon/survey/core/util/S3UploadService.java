@@ -37,7 +37,7 @@ public class S3UploadService {
         try (InputStream inputStream = new ByteArrayInputStream(file.getBytes())) {
             String originalFilename = file.getOriginalFilename().substring(0, file.getOriginalFilename().indexOf('.'));
             String uniqueFileName = generateUniqueFileName(file.getOriginalFilename());
-            String fileName = "images/" + originalFilename + "_" + uniqueFileName;  // images/ 디렉토리에 저장
+            String fileName = "images/" + originalFilename + "_" + uniqueFileName +".png";  // images/ 디렉토리에 저장
 
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentType(file.getContentType());
@@ -81,11 +81,28 @@ public class S3UploadService {
     // 고유한 파일 이름 생성 메서드
     private String generateUniqueFileName(String originalFileName) {
         String uuid = UUID.randomUUID().toString();
-        String extension = "";
-        if (originalFileName != null && originalFileName.contains(".")) {
-            extension = originalFileName.substring(originalFileName.lastIndexOf("."));
+//        String extension = "";
+//        if (originalFileName != null && originalFileName.contains(".")) {
+//            extension = originalFileName.substring(originalFileName.lastIndexOf("."));
+//        }
+        return uuid;
+    }
+
+    // byte[] 데이터를 받아 S3에 업로드하는 메서드 추가
+    public String uploadFile(byte[] fileData, String originalFilename, String contentType) {
+        try (InputStream inputStream = new ByteArrayInputStream(fileData)) {
+            String uniqueFileName = generateUniqueFileName(originalFilename);
+            String fileName = "images/" + uniqueFileName + ".png" ;
+
+            ObjectMetadata metadata = new ObjectMetadata();
+            metadata.setContentType(contentType);
+            metadata.setContentLength(fileData.length);
+
+            return uploadToS3(inputStream, fileName, metadata);
+        } catch (Exception e) {
+            log.error("S3 파일 업로드 중 오류 발생! 파일 이름: {}", originalFilename, e);
+            throw new CoreException(GlobalErrorType.S3_UPLOAD_FAILED);
         }
-        return uuid + extension;
     }
 
 
