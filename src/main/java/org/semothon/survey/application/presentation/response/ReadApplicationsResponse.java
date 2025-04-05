@@ -9,8 +9,6 @@ public record ReadApplicationsResponse(
 
         Long applicaitonId, // 신청서 아이디
 
-        String applicationUrl, // 신청서 url
-
         LocalDate applicationDate, // 신청날짜
 
         String classroom, // 신청 강의실
@@ -20,7 +18,6 @@ public record ReadApplicationsResponse(
     public static ReadApplicationsResponse from(Application application, ClassRoom classRoom) {
         return new ReadApplicationsResponse(
                 application.getApplicationId(),
-                "/api/applications/" + application.getApplicationId(),
                 application.getApplicationDate(),
                 classRoom.getClassroomBuilding() + " " + classRoom.getClassroomNumber(),
                 resolveSemester(application.getApplicationDate())

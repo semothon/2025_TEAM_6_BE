@@ -1,5 +1,6 @@
 package org.semothon.survey.report.domain.service;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.semothon.survey.report.domain.entity.Report;
 import org.semothon.survey.report.domain.repository.ReportRepository;
@@ -20,7 +21,7 @@ public class SubmitReportUseCase {
      * @param request SubmitReportRequest: applicationId와 reportUrl 포함
      * @return 저장된 Report 엔티티
      */
-    public Report submitReport(SubmitReportRequest request) {
+    public Report submitReport(@Valid SubmitReportRequest request) {
         Report report = Report.create(request.applicationId(), request.reportUrl());
         return reportRepository.save(report);
     }

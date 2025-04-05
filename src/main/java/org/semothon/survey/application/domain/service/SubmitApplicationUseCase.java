@@ -1,5 +1,6 @@
 package org.semothon.survey.application.domain.service;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.semothon.survey.application.domain.entity.Application;
 import org.semothon.survey.application.domain.repository.ApplicationRepository;
