@@ -54,6 +54,10 @@ dependencies {
 	implementation 'org.apache.pdfbox:pdfbox:2.0.27'
 	implementation 'commons-io:commons-io:2.11.0'
 	implementation 'org.jodconverter:jodconverter-local:4.1.0'
+
+	// monitoring
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'io.micrometer:micrometer-registry-prometheus'
 }
 
 tasks.named('test') {

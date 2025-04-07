@@ -19,7 +19,7 @@ public record ReadApplicationsResponse(
         return new ReadApplicationsResponse(
                 application.getApplicationId(),
                 application.getApplicationDate(),
-                classRoom.getClassroomBuilding() + " " + classRoom.getClassroomNumber(),
+                classRoom.getClassroomBuilding().getDescription() + " " + classRoom.getClassroomNumber(),
                 resolveSemester(application.getApplicationDate())
         );
     }
